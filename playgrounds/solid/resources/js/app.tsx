@@ -1,5 +1,6 @@
 import { createInertiaApp } from '@inertiajs/solid'
 import { render } from 'solid-js/web'
+import { MetaProvider } from 'solid-meta'
 
 createInertiaApp({
   resolve: (name) => {
@@ -7,6 +8,13 @@ createInertiaApp({
     return pages[`./Pages/${name}.tsx`]
   },
   setup({ el, App, props }) {
-    render(() => <App {...props} />, el)
+    render(
+      () => (
+        <MetaProvider>
+          <App {...props} />
+        </MetaProvider>
+      ),
+      el,
+    )
   },
 })

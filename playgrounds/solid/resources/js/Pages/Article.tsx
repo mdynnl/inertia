@@ -1,10 +1,10 @@
-import { Head } from '@inertiajs/solid'
+import { Title } from 'solid-meta'
 import Layout from '../Components/Layout'
 
 const Article = () => {
   return (
     <>
-      <Head title="Article" />
+      <Title title="Article" />
       <h1 class="text-3xl">Article</h1>
       <article class="max-w-3xl">
         <p class="my-6">

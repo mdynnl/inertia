@@ -1,8 +1,8 @@
-import { Head, useForm } from '@inertiajs/solid'
+import { useForm } from '@inertiajs/solid'
+import { Title } from 'solid-meta'
 import Layout from '../Components/Layout'
 
 const Form = () => {
-  console.log('form')
   const form = useForm('NewUser', {
     name: '',
     company: '',
@@ -16,7 +16,7 @@ const Form = () => {
 
   return (
     <>
-      <Head title="Form" />
+      <Title title="Form" />
       <h1 class="text-3xl">Form</h1>
       <form onSubmit={submit} class="mt-6 max-w-md space-y-4">
         {form.isDirty && (

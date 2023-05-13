@@ -1,10 +1,11 @@
-import { Head } from '@inertiajs/solid'
+import { For } from 'solid-js'
+import { Title } from 'solid-meta'
 import Layout from '../Components/Layout'
 
-const Users = ({ users }) => {
+const Users = (props) => {
   return (
     <>
-      <Head title="Users" />
+      <Title title="Users" />
       <h1 class="text-3xl">Users</h1>
       <div class="mt-6 w-full max-w-2xl overflow-hidden rounded border shadow-sm">
         <table class="w-full text-left">
@@ -16,13 +17,15 @@ const Users = ({ users }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
-              <tr class="border-t">
-                <td class="px-4 py-2">{user.id}</td>
-                <td class="px-4 py-2">{user.name}</td>
-                <td class="px-4 py-2">{user.email}</td>
-              </tr>
-            ))}
+            <For each={props.users}>
+              {(user) => (
+                <tr class="border-t">
+                  <td class="px-4 py-2">{user.id}</td>
+                  <td class="px-4 py-2">{user.name}</td>
+                  <td class="px-4 py-2">{user.email}</td>
+                </tr>
+              )}
+            </For>
           </tbody>
         </table>
       </div>
