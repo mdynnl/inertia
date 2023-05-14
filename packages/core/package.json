@@ -11,7 +11,7 @@
   "homepage": "https://inertiajs.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/src/inertia.ts",
+    "url": "https://github.com/inertiajs/inertia.git",
     "directory": "packages/inertia"
   },
   "bugs": {
@@ -22,24 +22,24 @@
     "types"
   ],
   "type": "module",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts",
-      "require": "./src/index.ts"
+      "types": "./types/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
     },
     "./server": {
-      "types": "./src/server.ts",
-      "import": "./src/server.ts",
-      "require": "./src/server.ts"
+      "types": "./types/server.d.ts",
+      "import": "./dist/server.esm.js",
+      "require": "./dist/server.js"
     }
   },
   "typesVersions": {
     "*": {
       "server": [
-        "src/server.ts"
+        "types/server.d.ts"
       ]
     }
   },

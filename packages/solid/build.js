@@ -6,7 +6,7 @@ const watch = process.argv.slice(1).includes('--watch')
 
 const config = {
   bundle: true,
-  minify: true,
+  minify: !true,
   sourcemap: true,
   target: 'es2020',
   plugins: [nodeExternalsPlugin()],

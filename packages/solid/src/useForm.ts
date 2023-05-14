@@ -138,7 +138,7 @@ export function useForm<TForm extends Record<string, unknown>>(
     }
   }
 
-  return {
+  return mergeProps({
     data: mergeProps(data) as TForm,
     setData(keyOrData: keyof TForm | Function | TForm, maybeValue?: TForm[keyof TForm]) {
       if (typeof keyOrData === 'string') {
@@ -242,5 +242,5 @@ export function useForm<TForm extends Record<string, unknown>>(
     cancel() {
       cancelToken?.cancel?.()
     },
-  }
+  }, data)
 }
