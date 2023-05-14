@@ -1,6 +1,6 @@
 import { createInertiaApp } from '@inertiajs/solid'
+import { MetaProvider } from '@solidjs/meta'
 import { render } from 'solid-js/web'
-import { MetaProvider } from 'solid-meta'
 
 createInertiaApp({
   resolve: (name) => {

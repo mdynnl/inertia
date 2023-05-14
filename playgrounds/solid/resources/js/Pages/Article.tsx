@@ -1,10 +1,10 @@
-import { Title } from 'solid-meta'
-import Layout from '../Components/Layout'
+import { Title } from '@solidjs/meta'
+import Layout from '~/Components/Layout'
 
 const Article = () => {
   return (
     <>
-      <Title title="Article" />
+      <Title>Article</Title>
       <h1 class="text-3xl">Article</h1>
       <article class="max-w-3xl">
         <p class="my-6">

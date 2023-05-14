@@ -1,6 +1,6 @@
-import solid from 'vite-plugin-solid'
 import laravel from 'laravel-vite-plugin'
 import { defineConfig } from 'vite'
+import solid from 'vite-plugin-solid'
 
 export default defineConfig({
   plugins: [
@@ -11,4 +11,9 @@ export default defineConfig({
     }),
     solid({}),
   ],
+  resolve: {
+    alias: {
+      '~': 'resources/js',
+    },
+  },
 })

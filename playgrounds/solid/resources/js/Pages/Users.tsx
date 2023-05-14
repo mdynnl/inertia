@@ -1,11 +1,11 @@
+import { Title } from '@solidjs/meta'
 import { For } from 'solid-js'
-import { Title } from 'solid-meta'
-import Layout from '../Components/Layout'
+import Layout from '~/Components/Layout'
 
 const Users = (props) => {
   return (
     <>
-      <Title title="Users" />
+      <Title>Users</Title>
       <h1 class="text-3xl">Users</h1>
       <div class="mt-6 w-full max-w-2xl overflow-hidden rounded border shadow-sm">
         <table class="w-full text-left">

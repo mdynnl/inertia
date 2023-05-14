@@ -1,10 +1,10 @@
-import { Title } from 'solid-meta'
-import Layout from '../Components/Layout'
+import { Title } from '@solidjs/meta'
+import Layout from '~/Components/Layout'
 
 const User = (props) => {
   return (
     <>
-      <Title title="User" />
+      <Title>User</Title>
       <h1 class="text-3xl">User</h1>
       <p class="mt-6">You successfully created a new user! Well not really, there is no persistence in this app.</p>
       <ul class="mt-6 space-y-2">
