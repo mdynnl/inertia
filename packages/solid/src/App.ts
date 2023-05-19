@@ -1,62 +1,55 @@
 import { PageProps, router } from '@inertiajs/core'
-import { createComponent, createMemo, createSignal, mergeProps, ParentProps } from 'solid-js'
+import { mergeProps, ParentProps } from 'solid-js'
+import { createStore, reconcile } from 'solid-js/store'
+import { createComponent, isServer } from 'solid-js/web'
 import { SetupOptions } from './createInertiaApp'
 import { PageContext } from './PageContext'
 
 export default function App(props: ParentProps<SetupOptions<unknown, PageProps>['props']>) {
   const { initialPage, initialComponent, resolveComponent } = props
-  const [current, setCurrent] = createSignal({
+  const [current, setCurrent] = createStore({
     component: initialComponent || null,
+    layout: [],
     page: initialPage,
     key: null,
   })
 
-  router.init({
-    initialPage,
-    resolveComponent,
-    swapComponent: async ({ component, page, preserveState }) => {
-      setCurrent(
-        (current) =>
-          ({
+  isServer ||
+    router.init({
+      initialPage,
+      resolveComponent,
+      swapComponent: async ({ component, page, preserveState }) => {
+        setCurrent(
+          reconcile({
             component,
             page,
+            layout: [(component as any).layout].flat(),
             key: preserveState ? current.key : Date.now(),
           } as typeof current),
-      )
-    },
-  })
+        )
+      },
+    })
 
   return createComponent(PageContext.Provider, {
-    value: mergeProps(() => current().page),
+    get value() {
+      return current.page
+    },
     get children() {
-      const component = createMemo(() => current().component)
-      return createMemo(() => {
-        if (!component()) return null
-
-        const children =
-          (props.children as any) ||
-          ((Component, props) => {
-            const child = createComponent(Component, props)
-
-            if (typeof Component.layout === 'function') {
-              return Component.layout(child)
-            }
-
-            if (Array.isArray(Component.layout)) {
-              return Component.layout
-                .concat(child)
-                .reverse()
-                .reduce((children, Layout) => createComponent(Layout, mergeProps({ children }, props)))
-            }
-
-            return child
-          })
-
-        return children(
-          component(),
-          mergeProps(() => current().page.props),
+      return (function next(i = 0, layout = current.layout[i]) {
+        return createComponent(
+          layout ?? current.component,
+          mergeProps(
+            () => current.page.props,
+            layout
+              ? {
+                  get children() {
+                    return next(i + 1)
+                  },
+                }
+              : null,
+          ),
         )
-      }) as unknown as Element
+      })()
     },
   })
 }
